@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Proprietario;
+use App\Http\Requests\ProprietarioFormRequest;
 
 class ProprietarioController extends Controller {
 
@@ -22,7 +23,7 @@ class ProprietarioController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(ProprietarioFormRequest $request) {
         $objeto = new Proprietario;
 
         $objeto->nome = $request->input('nome');
@@ -58,7 +59,7 @@ class ProprietarioController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(ProprietarioFormRequest $request, $id) {
         $objeto = Proprietario::find($id);
         $objeto->nome = $request->input('nome');
         $objeto->email = $request->input('email');

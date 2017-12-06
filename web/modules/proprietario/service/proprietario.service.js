@@ -71,7 +71,7 @@
 
 
         function update(proprietario) {
-            return $http.put(_baseUrl + '/' + proprietario.codigo, proprietario);
+            return $http.put(_baseUrl + '/' + proprietario.id, proprietario);
         };
 
 

@@ -5,10 +5,10 @@
     .module('cdm.system.module.proprietario')
     .controller('ProprietarioListarController', ProprietarioListarController);
 
-    ProprietarioListarController.$inject = ['$scope','ProprietarioService','ProprietarioFactory'];
+    ProprietarioListarController.$inject = ['$scope','ProprietarioService','ProprietarioFactory','$state'];
 
 
-    function ProprietarioListarController($scope, ProprietarioService,ProprietarioFactory) {
+    function ProprietarioListarController($scope, ProprietarioService,ProprietarioFactory,$state) {
         //Atributos
         var vm = this;
         vm.titulo = "proprietario listar";  
@@ -27,7 +27,8 @@
 
 
         function atualizar(objeto){
-
+            ProprietarioFactory.setProprietario(objeto);
+            $state.go('proprietario-manter');
         }
 
         function remover(codigo){

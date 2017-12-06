@@ -5,6 +5,7 @@
     .factory('ProprietarioFactory', ProprietarioFactory);
     
     ProprietarioFactory.$inject = [];
+    var proprietario = {};
 
 
     function ProprietarioFactory(){
@@ -13,7 +14,10 @@
             Proprietario: Proprietario,
             convert: convert,
             convertList: convertList,
-            convertBack:convertBack 
+            convertBack:convertBack,
+            getProprietario:getProprietario,
+            setProprietario:setProprietario,
+            limparProprietario:limparProprietario 
         };
 
         return exports;
@@ -74,11 +78,25 @@
                 converted.foto = proprietario.foto;
                 converted.adimplente = proprietario.adimplente;
                 converted.debito = proprietario.debito;
-                converted.morador = 'S';//proprietario.morador;
+                converted.morador = proprietario.morador;
                 converted.fone_principal = proprietario.fonePrincipal;
                 converted.fone_secundario = proprietario.foneSecundario;
             return converted;
         }
+
+        function getProprietario(){
+            return this.proprietario;
+        }
+
+        function setProprietario(item){
+            this.proprietario = item;
+        }
+
+        function limparProprietario(){
+            this.proprietario = undefined;
+        }
+
+
 
     }
 })();
