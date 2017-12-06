@@ -42,6 +42,7 @@ function getStates() {
                             files: [
                             'modules/proprietario/proprietario.module.js',
                             'modules/proprietario/service/proprietario.service.js',
+                            'modules/proprietario/factory/proprietario.factory.js',
                             'modules/proprietario/controller/proprietario.manter.controller.js'
                             ]});
                     }]
@@ -62,6 +63,7 @@ function getStates() {
                             files: [
                             'modules/proprietario/proprietario.module.js',
                             'modules/proprietario/service/proprietario.service.js',
+                            'modules/proprietario/factory/proprietario.factory.js',
                             'modules/proprietario/controller/proprietario.listar.controller.js'
                             ]});
                     }]

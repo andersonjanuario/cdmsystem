@@ -4863,6 +4863,10 @@ a.badge:hover, a.badge:focus {
   vertical-align: middle;
 }
 
+.vertical-align-important {
+  vertical-align: middle !important; 
+}
+
 .media-bottom {
   vertical-align: bottom;
 }

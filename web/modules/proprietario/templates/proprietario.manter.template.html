@@ -18,7 +18,7 @@
       <div class="card">
         <!--h3 class="card-title">Register</h3-->
         <div class="card-body">
-          <form>
+          <form name="proprietarioForm">
             <div class="row">
               <div class="form-group col-md-2">
                 <div class="image"><img class="img-circle" src="images/48.jpg" alt="User Image" style="width:120px"></div>
@@ -95,7 +95,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <button class="btn btn-primary icon-btn" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Cadastrar</button>&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-primary icon-btn" type="button" ng-click="ProprietarioManterCtrl.cadastrar(proprietarioForm)"><i class="fa fa-fw fa-lg fa-check-circle"></i>Cadastrar</button>&nbsp;&nbsp;&nbsp;
         <a class="btn btn-default icon-btn" ui-sref='proprietario-listar'><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar</a>
       </div>
     </div>

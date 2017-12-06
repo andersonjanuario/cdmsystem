@@ -9,7 +9,7 @@
 
     function ProprietarioService($http) {
 
-        var _baseUrl = 'http://localhost:8091/cdmsystem/public/proprietario/';
+        var _baseUrl = 'http://localhost:8091/cdmsystem/public/proprietario';
 
         // Methods
         this.create = create;
@@ -60,17 +60,23 @@
 
 
         function create(proprietario) {
+            /*return $http({
+                method: 'POST',
+                url: _baseUrl,
+                data: $.param(proprietario),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });*/
             return $http.post(_baseUrl,proprietario);
         };
 
 
         function update(proprietario) {
-            return $http.put(_baseUrl + proprietario.codigo, proprietario);
+            return $http.put(_baseUrl + '/' + proprietario.codigo, proprietario);
         };
 
 
         function remove(codigo) {
-            return $http.delete(_baseUrl + codigo);
+            return $http.delete(_baseUrl + '/' +codigo);
         };
 
 
