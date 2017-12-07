@@ -25,7 +25,7 @@ class ProprietarioFormRequest extends FormRequest
     {
         return [
             'nome'          => 'required|min:3|max:100',
-            'cpf'        => 'required|numeric',
+            'cpf'        => 'numeric',
             'adimplente'      => 'required',
             'morador'   => 'required',
         ];
@@ -35,8 +35,7 @@ class ProprietarioFormRequest extends FormRequest
     {
         return [
             'nome.required' => 'O campo nome é de preenchimento obrigatório!',
-            'cpf.numeric' => 'Precisa ser apenas números!',
-            'cpf.required' => 'O campo cpf é de preenchimento obrigatório!',
+            'cpf.numeric' => 'Precisa ser apenas números!',            
             'adimplente.required' => 'O campo adimplente é de preenchimento obrigatório!',
             'morador.required' => 'O campo morador é de preenchimento obrigatório!'
         ];

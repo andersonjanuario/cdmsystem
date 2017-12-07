@@ -21,12 +21,12 @@
           <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
               <tr>
-                <th >Nome</th>
-                <th >E-mail</th>
-                <th >RG</th>
-                <th >Telefone</th>
-                <th >Contato</th>
-                <th ></th>
+                <th class="col-md-3" >Nome</th>
+                <th class="col-md-2">E-mail</th>
+                <th class="col-md-1">RG</th>
+                <th class="col-md-2">Telefone</th>
+                <th class="col-md-2">Contato</th>
+                <th class="col-md-2"></th>
               </tr>
             </thead>
             <tbody>
@@ -38,8 +38,9 @@
                 <td class="vertical-align-important">{{objeto.foneSecundario}}</td>
                 <td class="text-center vertical-align-important">
                   <div class="btn-group">
-                    <a class="btn btn-info" ng-click="ProprietarioListarCtrl.atualizar(objeto)" ><i class="fa fa-lg fa-edit"></i></a>
-                    <a class="btn btn-warning" ng-click="ProprietarioListarCtrl.remover(objeto.id)" ><i class="fa fa-lg fa-trash"></i></a>
+                    <a class="btn btn-primary" href="#"><i class="fa fa-lg fa-eye"></i></a>
+                    <a class="btn btn-primary" ng-click="ProprietarioListarCtrl.atualizar(objeto)" ><i class="fa fa-lg fa-edit"></i></a>
+                    <a class="btn btn-primary" ng-click="ProprietarioListarCtrl.remover(objeto.id)" ><i class="fa fa-lg fa-trash"></i></a>
                   </div>
                 </td>
               </tr>                
@@ -51,6 +52,6 @@
   </div>                
 </div>
 
-<script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+<!--script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script-->

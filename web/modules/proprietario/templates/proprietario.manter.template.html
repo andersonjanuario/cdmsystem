@@ -26,39 +26,49 @@
             </div>            
             <div class="row">
               <div class="form-group col-md-6">
-                <label class="control-label">Nome</label>
-                <input class="form-control" type="text" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.nome">
+                <label class="control-label">Nome *</label>
+                <input class="form-control" type="text" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.nome" maxlength="250">
               </div>
               <div class="form-group col-md-6">
                 <label class="control-label">Email</label>
-                <input class="form-control" type="email" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.email">
+                <input class="form-control" type="email" placeholder="" maxlength="50" ng-model="ProprietarioManterCtrl.proprietario.email">
               </div>
             </div>
             <div class="row">    
               <div class="form-group col-md-6">
                 <label class="control-label">CPF</label>
-                <input class="form-control" type="text" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.cpf">
+                <input class="form-control" type="text" placeholder="" maxlength="15" 
+                ui-mask="999.999.999-99"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                ng-model="ProprietarioManterCtrl.proprietario.cpf">
               </div>
 
               <div class="form-group col-md-6">
                 <label class="control-label">Debito</label>
-                <input class="form-control" type="text" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.debito">
+                <input class="form-control" type="text" placeholder="" 
+                money-mask money-mask-prepend="R$"
+                ng-model="ProprietarioManterCtrl.proprietario.debito">
               </div> 
             </div>
             <div class="row">
               <div class="form-group col-md-6">
-                <label class="control-label">Telefone</label>
-                <input class="form-control" type="text" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.telefone">
+                <label class="control-label">Telefone (Não precisa colocar digito 9 no para celulares)</label>
+                <input class="form-control" type="text" placeholder="" 
+                ui-mask="(99) 9999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                maxlength="15" ng-model="ProprietarioManterCtrl.proprietario.fonePrincipal">
               </div>  
               <div class="form-group col-md-6">
-                <label class="control-label">Telefone Contato</label>
-                <input class="form-control" type="text" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.telefoneContato">
+                <label class="control-label">Telefone Contato (Não precisa colocar digito 9 no para celulares)</label>
+                <input class="form-control" type="text" placeholder="" 
+                ui-mask="(99) 9999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                maxlength="15" ng-model="ProprietarioManterCtrl.proprietario.foneSecundario">
               </div> 
             </div>
             <div class="row">                              
               <div class="form-group col-md-6">
                 <label class="control-label">RG</label>
-                <input class="form-control" type="text" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.rg">
+                <input class="form-control" type="text" placeholder="" maxlength="15" 
+                ui-mask="?9?9?9?9?9?9?9?9?9?9?9?9" 
+                ng-model="ProprietarioManterCtrl.proprietario.rg">
               </div>   
               <div class="form-group col-md-6">
                 <label class="control-label col-md-8">O proprietário encontra-se <b>ADIMPLENTE</b></label>
