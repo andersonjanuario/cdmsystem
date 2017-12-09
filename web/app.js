@@ -11,7 +11,7 @@
     function AppController($scope,$rootScope, $log, $state) {
         var vm = this;
         //var $log = $log.getLogger('CONSTANTES.LOG_FORUM');
-        vm.titulo = "Vali2";
+        vm.titulo = "Jatobás";
         vm.getHome = getHome;
         vm.getProprietarioListar = getProprietarioListar;
         vm.getProprietarioNovo = getProprietarioNovo;

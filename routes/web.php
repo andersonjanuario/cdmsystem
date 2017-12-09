@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'proprietario'], function () {
     Route::get('', 'ProprietarioController@index');
+    Route::get('/all', 'ProprietarioController@all');
     Route::get('/{id}', 'ProprietarioController@show');
     Route::post('', 'ProprietarioController@store');
     Route::put('/{id}', 'ProprietarioController@update');

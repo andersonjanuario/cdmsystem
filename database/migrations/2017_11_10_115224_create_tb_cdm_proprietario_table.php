@@ -17,7 +17,7 @@ class CreateTbCdmProprietarioTable extends Migration
             $table->increments('id');
             $table->string('nome',255);
             $table->string('email',50)->nullable()->unique();
-            $table->string('cpf',15)->nullable();
+            $table->string('cpf',15);
             $table->string('rg',15)->nullable();
             $table->binary('foto')->nullable();
             $table->string('adimplente',1)->nullable()->default('S')->comment = "N=Não,S=Sim";

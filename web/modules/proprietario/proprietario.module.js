@@ -1,1 +1,1 @@
-var app = angular.module('cdm.system.module.proprietario', []);
+var app = angular.module('cdm.system.module.proprietario', ['cdm.system.module']);

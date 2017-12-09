@@ -19,6 +19,8 @@
     "angular-ui-router": "^1.0.11",
     "oclazyload": "https://github.com/ocombe/ocLazyLoad.git#^1.1.0",
     "angular-ui-mask": "^1.8.7",
-    "angular-input-masks": "^2.6.0"
+    "angular-input-masks": "^2.6.0",
+    "angular-bootstrap": "^2.5.0",
+    "bootstrap": "https://github.com/angular-ui/bootstrap.git#^2.5.6"
   }
 }

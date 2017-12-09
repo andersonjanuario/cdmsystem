@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Proprietario;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProprietarioFormRequest;
+use Illuminate\Http\Response;
 
 class ProprietarioController extends Controller {
 
@@ -13,9 +15,68 @@ class ProprietarioController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Proprietario $prop) {
-        return $prop->all();
-    }
+    public function index(Proprietario $prop,Request $request) {
+
+        //dd($request->input('pesquisa')); 
+        $total = 0;
+        $skip = 0;
+        $take = 5;
+        $order = 'nome';
+        $sort = 'asc';        
+        if($request->input('skip') !== null && $request->input('skip') !== ''){
+            $skip = $request->input('skip');
+        }
+        if($request->input('take') !== null && $request->input('take') !== ''){
+            $take =  $request->input('take');
+        }
+        if($request->input('order') !== null && $request->input('order') !== ''){
+            $order = $request->input('order');
+        }
+        if($request->input('sort') !== null && $request->input('sort') !== '' ){
+            $sort = $request->input('sort');
+        }
+        if($request->input('pesquisa') !== null && $request->input('pesquisa') !== '' ){
+            $content = $prop
+                   ->skip($skip)   //Pagina atual
+                   ->take($take)   //Total por Pagina
+                   ->where('nome', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->orWhere('email', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->orderBy($order, $sort)
+                   ->get();
+
+                   $total = $prop
+                   ->where('nome', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->orWhere('email', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->get()->count();     
+
+               }else{
+                $content = $prop
+                   ->skip($skip)   //Pagina atual
+                   ->take($take)   //Total por Pagina
+                   ->orderBy($order, $sort)
+                   ->get();
+
+                   $total =  $prop->all()->count();      
+               }
+
+
+
+               foreach ($content as $objeto) {
+                $objeto->foto = null;
+            }
+
+            return response($content)->header('X-Total-Registros', $total);     
+        }
+
+
+        public function all(Proprietario $prop) {
+            $content = $prop->orderBy('nome', 'asc')->all(); 
+            foreach ($content as $objeto) {
+                $objeto->foto = null;
+            }
+
+            return $content;
+        }
 
     /**
      * Store a newly created resource in storage.
