@@ -24,7 +24,7 @@ class CreateTbCdmVisitanteTable extends Migration
             
 //            $table->dateTime('entrada');
 //            $table->dateTime('saida')->nullable();
-            $table->string('rg',20);
+            $table->string('rg',20)->nullable();
             
             //$table->integer('tb_cdm_morador_id')->unsigned();
             //$table->foreign('tb_cdm_morador_id')->references('id')->on('tb_cdm_morador')->onDelete('cascade');

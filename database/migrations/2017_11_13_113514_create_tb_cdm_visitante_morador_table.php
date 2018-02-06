@@ -13,6 +13,7 @@ class CreateTbCdmVisitanteMoradorTable extends Migration {
      */
     public function up() {
         Schema::create('tb_cdm_visitante_morador', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('visitante_id')->unsigned();
             $table->foreign('visitante_id')->
                     references('id')->
@@ -23,7 +24,8 @@ class CreateTbCdmVisitanteMoradorTable extends Migration {
                     references('id')->
                     on('tb_cdm_morador');
 
-            $table->dateTime('data_visita');
+            $table->date('data_visita');
+            $table->timestamps();
         });
     }
 

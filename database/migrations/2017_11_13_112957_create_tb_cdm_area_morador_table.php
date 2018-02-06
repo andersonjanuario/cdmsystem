@@ -13,6 +13,7 @@ class CreateTbCdmAreaMoradorTable extends Migration {
      */
     public function up() {
         Schema::create('tb_cdm_area_morador', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('area_id')->unsigned();
             $table->foreign('area_id')->
                     references('id')->
@@ -23,10 +24,10 @@ class CreateTbCdmAreaMoradorTable extends Migration {
                     references('id')->
                     on('tb_cdm_morador');
             
-            $table->dateTime('reserva');
+            $table->date('reserva');
             $table->string('status',1)->default('R')->comment = "R=Reservado,C=Cancelado,P=Pendente";
             $table->double('saldo',8,2)->nullable();
-
+            $table->timestamps();
         });
     }
 

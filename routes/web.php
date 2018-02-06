@@ -26,7 +26,8 @@ Route::group(['prefix' => 'proprietario'], function () {
 
 Route::group(['prefix' => 'apartamento'], function () {
     Route::get('', 'ApartamentoController@index');
-    Route::get('/{id}', 'ApartamentoController@show');
+    Route::get('/all', 'ApartamentoController@all');
+    Route::get('/{id}', 'ApartamentoController@show');    
     Route::post('', 'ApartamentoController@store');
     Route::put('/{id}', 'ApartamentoController@update');
     Route::delete('/{id}', 'ApartamentoController@destroy');
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'apartamento'], function () {
 
 Route::group(['prefix' => 'area'], function () {
     Route::get('', 'AreaController@index');
+    Route::get('/all', 'AreaController@all');
     Route::get('/{id}', 'AreaController@show');
     Route::post('', 'AreaController@store');
     Route::put('/{id}', 'AreaController@update');
@@ -42,6 +44,7 @@ Route::group(['prefix' => 'area'], function () {
 
 Route::group(['prefix' => 'veiculo'], function () {
     Route::get('', 'VeiculoController@index');
+    Route::get('/all', 'VeiculoController@all');
     Route::get('/{id}', 'VeiculoController@show');
     Route::post('', 'VeiculoController@store');
     Route::put('/{id}', 'VeiculoController@update');
@@ -58,6 +61,8 @@ Route::group(['prefix' => 'visitante'], function () {
 
 Route::group(['prefix' => 'morador'], function () {
     Route::get('', 'MoradorController@index');
+    Route::get('/all', 'MoradorController@all');
+    Route::get('/findByApartamento/{apartamento_id}', 'MoradorController@findByApartamento');    
     Route::get('/{id}', 'MoradorController@show');
     Route::post('', 'MoradorController@store');
     Route::put('/{id}', 'MoradorController@update');
@@ -74,6 +79,7 @@ Route::group(['prefix' => 'visitantemorador'], function () {
     Route::get('', 'VisitanteMoradorController@index');
     Route::get('/moradores/{id}', 'VisitanteMoradorController@showMoradores');
     Route::get('/visitantes/{id}', 'VisitanteMoradorController@showVisitantes');
+    Route::get('/data', 'VisitanteMoradorController@findByDateMorador');    
     Route::post('', 'VisitanteMoradorController@store');
     Route::put('/{id}', 'VisitanteMoradorController@update');
     Route::delete('/{id}', 'VisitanteMoradorController@destroy');
@@ -81,6 +87,7 @@ Route::group(['prefix' => 'visitantemorador'], function () {
 
 Route::group(['prefix' => 'areamorador'], function () {
     Route::get('', 'AreaMoradorController@index');
+    Route::get('/all', 'AreaMoradorController@all');
     Route::get('/moradores/{id}', 'AreaMoradorController@showMoradores');
     Route::get('/areas/{id}', 'AreaMoradorController@showAreas');
     Route::post('', 'AreaMoradorController@store');

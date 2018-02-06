@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Visitante;
 use Illuminate\Http\Request;
+use App\Models\VisitanteMorador;
+use App\Http\Controllers\VisitanteMoradorController;
 
 class VisitanteController extends Controller {
 
@@ -23,17 +25,31 @@ class VisitanteController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $objeto = new Visitante;
-        $objeto->nome = $request->input('nome');
-        $objeto->descricao = $request->input('descricao');
-        $objeto->cpf = $request->input('cpf');
-        $objeto->foto = $request->input('foto');
-        $objeto->idade = $request->input('idade');
-        $objeto->rg = $request->input('rg');
-        $objeto->created_at = date("Y-m-d H:i:s");
-        $objeto->fone_principal = $request->input('fone_principal');
 
-        $objeto->save();
+        if($request->input('visitantes') !== null && count($request->input('visitantes')) > 0){
+            foreach ($request->input('visitantes') as $visitante) {
+                $objeto = new Visitante;
+                $objeto->nome = $visitante['nome'];
+                //$objeto->descricao = $visitante['descricao'];
+                $objeto->cpf = $visitante['cpf'];
+                $objeto->foto = $visitante['foto'];
+                $objeto->idade = $visitante['idade'];
+                $objeto->rg = $visitante['rg'];
+                $objeto->created_at = date("Y-m-d H:i:s");
+                //$objeto->fone_principal = $visitante['fone_principal'];
+                $objeto->save();
+
+                $visitanteMorador = new VisitanteMorador;
+                $visitanteMorador->visitante_id = $objeto->id;
+                $visitanteMorador->morador_id = $request->input('morador_id');
+                $visitanteMorador->data_visita = date("Y-m-d");
+                $visitanteMorador->created_at = date("Y-m-d H:i:s");
+                $visitanteMorador->save();   
+
+            }
+        }
+
+        return "Visitante(s) cadastrado com sucesso";
     }
 
     /**
@@ -65,7 +81,7 @@ class VisitanteController extends Controller {
         
         $objeto->updated_at = date("Y-m-d H:i:s");
         $objeto->save();
-        return "Proprietário sucess updating user #" . $id;
+        return "Visitante(s) atualizado com sucesso";
     }
 
     /**
@@ -77,7 +93,7 @@ class VisitanteController extends Controller {
     public function destroy($id) {
         $objeto = Visitante::find($id);
         $objeto->delete();
-        return "Record successfully deleted #" . $id;
+        return "Visitante(s) excluído com sucesso";
     }
 
 }

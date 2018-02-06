@@ -15,8 +15,8 @@ class CreateTbCdmApartamentoTable extends Migration
     {
         Schema::create('tb_cdm_apartamento', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('numero');
-            $table->integer('bloco');
+            $table->string('numero',3);
+            $table->string('bloco',1);
             $table->string('bosque',1);
             $table->integer('proprietario_id')->unsigned();
             $table->foreign('proprietario_id')->references('id')->on('tb_cdm_proprietario')->onDelete('cascade');

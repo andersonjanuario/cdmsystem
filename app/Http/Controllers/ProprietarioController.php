@@ -69,14 +69,14 @@ class ProprietarioController extends Controller {
         }
 
 
-        public function all(Proprietario $prop) {
-            $content = $prop->orderBy('nome', 'asc')->all(); 
-            foreach ($content as $objeto) {
-                $objeto->foto = null;
-            }
-
-            return $content;
+    public function all(Proprietario $prop) {
+        $content = $prop->orderBy('nome', 'asc')->get(); 
+        foreach ($content as $objeto) {
+            $objeto->foto = null;
         }
+
+        return $content;
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -100,7 +100,7 @@ class ProprietarioController extends Controller {
         $objeto->fone_secundario = $request->input('fone_secundario');
         $objeto->save();
 
-        return 'Proprietário record successfully created with id ' . $objeto->id;
+        return "Proprietário cadastrado com sucesso";
     }
 
     /**
@@ -136,7 +136,7 @@ class ProprietarioController extends Controller {
         $objeto->updated_at = date("Y-m-d H:i:s");
         $objeto->save();
         //dd($employee); debug do laravel.
-        return "Proprietário sucess updating user #" . $id;
+        return "Proprietário atualizado com sucesso";
     }
 
     /**
@@ -148,7 +148,7 @@ class ProprietarioController extends Controller {
     public function destroy($id) {
         $objeto = Proprietario::find($id);
         $objeto->delete();
-        return "Proprietário record successfully deleted #" . $id;
+        return "Proprietário removido com sucesso";
     }
 
 }

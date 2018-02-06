@@ -48,7 +48,121 @@ class VisitanteMoradorController extends Controller {
                 ->orderBy('v.nome', 'asc')                
                 ->get();
 
+                foreach ($dados as $objeto) {
+                    $objeto->foto_morad = null;
+                }
+
         return $dados;
+    }
+
+    public function findByDateMorador(VisitanteMorador $visitMorador, Request $request){
+        $total = 0;
+        $skip = 0;
+        $take = 5;
+        $order = 'tb_cdm_visitante_morador.data_visita';
+        $sort = 'desc';        
+        if($request->input('skip') !== null && $request->input('skip') !== ''){
+            $skip = $request->input('skip');
+        }
+        if($request->input('take') !== null && $request->input('take') !== ''){
+            $take =  $request->input('take');
+        }
+        if($request->input('order') !== null && $request->input('order') !== ''){
+            $order = $request->input('order');
+        }
+        if($request->input('sort') !== null && $request->input('sort') !== '' ){
+            $sort = $request->input('sort');
+        }
+        if($request->input('pesquisa') !== null && $request->input('pesquisa') !== '' ){
+            $content = DB::table('tb_cdm_visitante_morador')
+                   ->select('tb_cdm_visitante_morador.morador_id',
+                    'tb_cdm_morador.nome',
+                    'tb_cdm_apartamento.numero as numero_apto',
+                    'tb_cdm_apartamento.bloco as bloco_apto',
+                    'tb_cdm_apartamento.bosque as bosque_apto',                    
+                    'tb_cdm_visitante_morador.data_visita')
+                   ->join('tb_cdm_morador', 'tb_cdm_visitante_morador.morador_id', '=', 'tb_cdm_morador.id')
+                   ->join('tb_cdm_apartamento', 'tb_cdm_morador.apartamento_id', '=', 'tb_cdm_apartamento.id')
+                   ->skip($skip)   
+                   ->take($take)   
+                   //->where('tb_cdm_veiculo.placa', 'like', '%' . $request->input('pesquisa') . '%')
+                   //->orWhere('tb_cdm_veiculo.cor', 'like', '%' . $request->input('pesquisa') . '%')
+                   //->orWhere('tb_cdm_veiculo.tipo', 'like', '%' . $request->input('pesquisa') . '%')
+                   //->orWhere('tb_cdm_veiculo.descricao', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->groupBy('morador_id')
+                   ->groupBy('tb_cdm_morador.nome')
+                   ->groupBy('numero_apto')
+                   ->groupBy('bloco_apto')
+                   ->groupBy('bosque_apto')
+                   ->groupBy('data_visita')                   
+                   ->orderBy($order, $sort)
+                   ->get();
+
+            $total = DB::table('tb_cdm_visitante_morador')
+                   ->select('tb_cdm_visitante_morador.morador_id',            
+                    'tb_cdm_morador.nome',
+                    'tb_cdm_apartamento.numero as numero_apto',
+                    'tb_cdm_apartamento.bloco as bloco_apto',
+                    'tb_cdm_apartamento.bosque as bosque_apto',                    
+                    'tb_cdm_visitante_morador.data_visita')
+                   ->join('tb_cdm_morador', 'tb_cdm_visitante_morador.morador_id', '=', 'tb_cdm_morador.id')
+                   ->join('tb_cdm_apartamento', 'tb_cdm_morador.apartamento_id', '=', 'tb_cdm_apartamento.id')
+                   ->skip($skip)   
+                   ->take($take)   
+                   //->where('tb_cdm_veiculo.placa', 'like', '%' . $request->input('pesquisa') . '%')
+                   //->orWhere('tb_cdm_veiculo.cor', 'like', '%' . $request->input('pesquisa') . '%')
+                   //->orWhere('tb_cdm_veiculo.tipo', 'like', '%' . $request->input('pesquisa') . '%')
+                   //->orWhere('tb_cdm_veiculo.descricao', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->groupBy('morador_id')
+                   ->groupBy('tb_cdm_morador.nome')
+                   ->groupBy('numero_apto')
+                   ->groupBy('bloco_apto')
+                   ->groupBy('bosque_apto')
+                   ->groupBy('data_visita')                 
+                   ->get()->count();     
+
+        }else{
+            $content = DB::table('tb_cdm_visitante_morador')
+           ->select('tb_cdm_visitante_morador.morador_id',            
+                    'tb_cdm_morador.nome',
+                    'tb_cdm_apartamento.numero as numero_apto',
+                    'tb_cdm_apartamento.bloco as bloco_apto',
+                    'tb_cdm_apartamento.bosque as bosque_apto',                    
+                    'tb_cdm_visitante_morador.data_visita')
+                   ->join('tb_cdm_morador', 'tb_cdm_visitante_morador.morador_id', '=', 'tb_cdm_morador.id')
+                   ->join('tb_cdm_apartamento', 'tb_cdm_morador.apartamento_id', '=', 'tb_cdm_apartamento.id')
+                   ->skip($skip)   
+                   ->take($take)   
+                   ->groupBy('morador_id')
+                   ->groupBy('tb_cdm_morador.nome')
+                   ->groupBy('numero_apto')
+                   ->groupBy('bloco_apto')
+                   ->groupBy('bosque_apto')
+                   ->groupBy('data_visita')                   
+                   ->orderBy($order, $sort)
+                   ->get();
+
+            $total = DB::table('tb_cdm_visitante_morador')
+           ->select('tb_cdm_visitante_morador.morador_id',             
+                    'tb_cdm_morador.nome',
+                    'tb_cdm_apartamento.numero as numero_apto',
+                    'tb_cdm_apartamento.bloco as bloco_apto',
+                    'tb_cdm_apartamento.bosque as bosque_apto',                    
+                    'tb_cdm_visitante_morador.data_visita')
+                   ->join('tb_cdm_morador', 'tb_cdm_visitante_morador.morador_id', '=', 'tb_cdm_morador.id')
+                   ->join('tb_cdm_apartamento', 'tb_cdm_morador.apartamento_id', '=', 'tb_cdm_apartamento.id')
+                   ->skip($skip)   
+                   ->take($take)   
+                   ->groupBy('morador_id')
+                   ->groupBy('tb_cdm_morador.nome')
+                   ->groupBy('numero_apto')
+                   ->groupBy('bloco_apto')
+                   ->groupBy('bosque_apto')
+                   ->groupBy('data_visita')                 
+                   ->get()->count();        
+        }
+
+            return response($content)->header('X-Total-Registros', $total);          
     }
     
     
@@ -104,11 +218,31 @@ class VisitanteMoradorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function showMoradores($id) {
-        $dados = DB::table('tb_cdm_visitante_morador as t')
-                ->select('m.*','t.data_visita')
-                ->join('tb_cdm_morador as m', 't.morador_id', '=', 'm.id')
-                ->where('t.visitante_id', $id)
-                 ->orderBy('m.nome', 'asc')   
+        $dados = DB::table('tb_cdm_visitante_morador')
+                ->select('tb_cdm_morador.id',
+                        'tb_cdm_morador.nome',
+                        'tb_cdm_morador.email',
+                        'tb_cdm_morador.cpf',
+                        'tb_cdm_morador.foto',
+                        'tb_cdm_morador.inquilino',                        
+                        'tb_cdm_morador.idade',
+                        'tb_cdm_morador.entrada',
+                        'tb_cdm_morador.saida',
+                        'tb_cdm_morador.status',
+                        'tb_cdm_morador.rg',
+                        'tb_cdm_morador.fone_principal',
+                        'tb_cdm_morador.fone_secundario',
+                        'tb_cdm_morador.created_at',
+                        'tb_cdm_morador.updated_at',
+                        'tb_cdm_morador.apartamento_id',
+                        'tb_cdm_apartamento.numero as numero_apto',
+                        'tb_cdm_apartamento.bloco as bloco_apto',
+                        'tb_cdm_apartamento.bosque as bosque_apto',
+                        'tb_cdm_visitante_morador.data_visita')
+                ->join('tb_cdm_morador', 'tb_cdm_visitante_morador.morador_id', '=', 'tb_cdm_morador.id')
+                ->join('tb_cdm_apartamento', 'tb_cdm_morador.apartamento_id', '=', 'tb_cdm_apartamento.id')
+                ->where('tb_cdm_visitante_morador.visitante_id', $id)
+                ->orderBy('tb_cdm_morador.nome', 'asc')   
                 ->get();
 
         return $dados;

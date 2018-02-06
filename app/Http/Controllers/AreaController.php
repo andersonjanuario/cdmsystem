@@ -11,8 +11,56 @@ class AreaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        return Area::all();
+    public function index(Area $area,Request $request) {
+
+        //dd($request->input('pesquisa')); 
+        $total = 0;
+        $skip = 0;
+        $take = 5;
+        $order = 'titulo';
+        $sort = 'asc';        
+        if($request->input('skip') !== null && $request->input('skip') !== ''){
+            $skip = $request->input('skip');
+        }
+        if($request->input('take') !== null && $request->input('take') !== ''){
+            $take =  $request->input('take');
+        }
+        if($request->input('order') !== null && $request->input('order') !== ''){
+            $order = $request->input('order');
+        }
+        if($request->input('sort') !== null && $request->input('sort') !== '' ){
+            $sort = $request->input('sort');
+        }
+        if($request->input('pesquisa') !== null && $request->input('pesquisa') !== '' ){
+            $content = $area
+                   ->skip($skip)   //Pagina atual
+                   ->take($take)   //Total por Pagina
+                   ->where('titulo', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->orWhere('descricao', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->orderBy($order, $sort)
+                   ->get();
+
+                   $total = $area
+                   ->where('titulo', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->orWhere('descricao', 'like', '%' . $request->input('pesquisa') . '%')
+                   ->get()->count();     
+
+        }else{
+                $content = $area
+                   ->skip($skip)   //Pagina atual
+                   ->take($take)   //Total por Pagina
+                   ->orderBy($order, $sort)
+                   ->get();
+
+                   $total =  $area->all()->count();      
+        }
+            return response($content)->header('X-Total-Registros', $total);     
+    }
+
+
+    public function all(Area $area) {
+        $content = $area->orderBy('titulo', 'asc')->get(); 
+        return $content;
     }
 
     /**
