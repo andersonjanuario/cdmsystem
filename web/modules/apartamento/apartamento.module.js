@@ -1,0 +1,1 @@
+var app = angular.module('cdm.system.module.apartamento', ['cdm.system.module']);

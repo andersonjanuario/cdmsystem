@@ -1,0 +1,116 @@
+
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-dashboard"></i> {{MoradorListarCtrl.titulo}}</h1>
+      <p>A free and modular admin template</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li><a href="#">{{MoradorListarCtrl.titulo}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-title"><button class="btn btn-primary icon-btn" type="button" ui-sref='morador-manter'><i class="fa fa-fw fa-lg fa-check-circle"></i>Cadastrar</button></div>
+        <div class="card-body">
+<div class="row">
+<div class="col-md-12">
+   <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="dataTables_length">
+               <label>
+                  Registros por página: 
+                  <select ng-model="MoradorListarCtrl.registrosPorPagina" ng-change="MoradorListarCtrl.registrosPorPaginaAlterados()" class="form-control"
+                  ng-options="option as option for option in MoradorListarCtrl.selectTop track by option">
+                  </select>
+               </label>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="dataTables_filter">
+              <label>Pesquisa:
+                <div class="input-group">
+                    <input class="form-control" style="width: 97%" ng-model="MoradorListarCtrl.pesquisa" type="text" >
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" ng-click="MoradorListarCtrl.pesquisar()" type="button">Pesquisar</button>
+                    </span>
+                </div>                
+              </label>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-12">
+            <table class="table table-hover table-bordered dataTable no-footer">
+               <thead>
+                  <tr role="row">
+                     <th class="col-md-3" ng-class="MoradorListarCtrl.sorterIconCheck('tb_cdm_morador.nome')" ng-click="MoradorListarCtrl.sorter('tb_cdm_morador.nome')" style="width: 217px;">Nome</th>
+                     <th class="col-md-2 hidden-sm hidden-xs" ng-class="MoradorListarCtrl.sorterIconCheck('tb_cdm_morador.rg')" ng-click="MoradorListarCtrl.sorter('tb_cdm_morador.rg')" style="width: 133px;">RG</th>
+                     <th class="col-md-1 hidden-sm hidden-xs" ng-class="MoradorListarCtrl.sorterIconCheck('tb_cdm_morador.fone_principal')" ng-click="MoradorListarCtrl.sorter('tb_cdm_morador.fone_principal')"style="width: 50px;">Telefone</th>
+                     <th class="col-md-4 hidden-sm hidden-xs" ng-class="MoradorListarCtrl.sorterIconCheck('tb_cdm_apartamento.bloco')" ng-click="MoradorListarCtrl.sorter('tb_cdm_apartamento.bloco')" style="width: 263px;">Apartamento</th>
+                     <th class="col-md-2" style="min-width:150px"></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="objeto in MoradorListarCtrl.moradors" class="odd ng-scope">
+                     <td class="vertical-align-important">{{objeto.nome}}</td>
+                     <td class="vertical-align-important hidden-sm hidden-xs">{{objeto.rg}}</td>
+                     <td class="vertical-align-important hidden-sm hidden-xs">{{objeto.fone_principal}}</td>
+                     <td class="vertical-align-important hidden-sm hidden-xs">{{objeto.apartamento.descricao}}</td>
+                     <td class="text-center vertical-align-important">
+                        <div class="btn-group">
+                           <a class="btn btn-primary" ng-click="MoradorListarCtrl.visualizar(objeto)"><i class="fa fa-lg fa-eye"></i></a>
+                           <a class="btn btn-primary" ng-click="MoradorListarCtrl.atualizar(objeto)"><i class="fa fa-lg fa-edit"></i></a>
+                           <a class="btn btn-primary" ng-click="MoradorListarCtrl.remover(objeto.id)"><i class="fa fa-lg fa-trash"></i></a>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-5">
+            <div class="dataTables_info">Página <b>{{MoradorListarCtrl.currentPage}}</b> de <b>{{numPages}}</b> de um total de <b>{{MoradorListarCtrl.totalItems}}</b> registros</div>
+         </div>
+         <div class="col-sm-7">
+            <div class="dataTables_paginate paging_simple_numbers">
+            <ul uib-pagination 
+              total-items="MoradorListarCtrl.totalItems" 
+              ng-model="MoradorListarCtrl.currentPage"
+              items-per-page="MoradorListarCtrl.registrosPorPagina" 
+              max-size="MoradorListarCtrl.maxSize" 
+              class="dataTables_paginate paging_simple_numbers" 
+              boundary-links="true"
+              ng-change="MoradorListarCtrl.pageChanged()"
+              rotate="true"
+              force-ellipses="true" 
+              num-pages="numPages"
+              previous-text="Próximo" next-text="Anterior" first-text="Primeira" last-text="Útima"
+              >
+            </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>                
+</div>
+
+<!--script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script-->

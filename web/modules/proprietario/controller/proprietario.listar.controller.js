@@ -96,7 +96,9 @@
 
         function findByFilter(skipIn, takeIn, pesquisa, order, sort) {
             ProprietarioService.findByFilter(skipIn, takeIn,pesquisa, order, sort).then(function onSuccess(response) {
-                vm.totalItems = parseInt(response.headers('X-Total-Registros'));
+                if(response.headers('X-Total-Registros') !== null && !angular.isUndefined(response.headers('X-Total-Registros'))){
+                    vm.totalItems = parseInt(response.headers('X-Total-Registros'));
+                }
                 vm.proprietarios = ProprietarioFactory.convertList(response.data);                
             }).catch(function onError(response) {
                 console.log(response);

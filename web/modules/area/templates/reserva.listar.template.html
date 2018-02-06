@@ -1,0 +1,114 @@
+
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-dashboard"></i> {{ReservaListarCtrl.titulo}}</h1>
+      <p>A free and modular admin template</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li><a href="#">{{ReservaListarCtrl.titulo}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-title"><button class="btn btn-primary icon-btn" type="button" ui-sref='reserva-manter'><i class="fa fa-fw fa-lg fa-check-circle"></i>Cadastrar</button></div>
+        <div class="card-body">
+<div class="row">
+<div class="col-md-12">
+   <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="dataTables_length">
+               <label>
+                  Registros por página: 
+                  <select ng-model="ReservaListarCtrl.registrosPorPagina" ng-change="ReservaListarCtrl.registrosPorPaginaAlterados()" class="form-control"
+                  ng-options="option as option for option in ReservaListarCtrl.selectTop track by option">
+                  </select>
+               </label>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="dataTables_filter">
+              <label>Pesquisa:
+                <div class="input-group">
+                    <input class="form-control" style="width: 97%" ng-model="ReservaListarCtrl.pesquisa" type="text" >
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" ng-click="ReservaListarCtrl.pesquisar()" type="button">Pesquisar</button>
+                    </span>
+                </div>                
+              </label>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-12">
+            <table class="table table-hover table-bordered dataTable no-footer">
+               <thead>
+                  <tr role="row">
+                     <th class="col-md-2 hidden-sm hidden-xs" ng-class="ReservaListarCtrl.sorterIconCheck('tb_cdm_area_morador.reserva')" ng-click="ReservaListarCtrl.sorter('tb_cdm_area_morador.reserva')" style="width: 133px;">Data da Reserva</th>
+                     <th class="col-md-3" ng-class="ReservaListarCtrl.sorterIconCheck('tb_cdm_area.titulo')" ng-click="ReservaListarCtrl.sorter('tb_cdm_area.titulo')" style="width: 217px;">Titulo</th>
+                     <th class="col-md-2 hidden-sm hidden-xs" ng-class="ReservaListarCtrl.sorterIconCheck('tb_cdm_morador.nome')" ng-click="ReservaListarCtrl.sorter('tb_cdm_morador.nome')" style="width: 133px;">Morador</th>
+                     <th class="col-md-2" style="min-width:150px"></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="objeto in ReservaListarCtrl.reservas" class="odd ng-scope">
+                     <td class="vertical-align-important hidden-sm hidden-xs">{{objeto.reserva | date:'dd/MM/yyyy'}}</td>
+                     <td class="vertical-align-important">{{objeto.area.titulo}}</td>
+                     <td class="vertical-align-important hidden-sm hidden-xs">{{objeto.morador.nome}}</td>                     
+                     <td class="text-center vertical-align-important">
+                        <div class="btn-group">
+                           <a class="btn btn-primary" ng-click="ReservaListarCtrl.visualizar(objeto)"><i class="fa fa-lg fa-eye"></i></a>
+                           <a class="btn btn-primary" ng-click="ReservaListarCtrl.atualizar(objeto)"><i class="fa fa-lg fa-edit"></i></a>
+                           <a class="btn btn-primary" ng-click="ReservaListarCtrl.remover(objeto.id)"><i class="fa fa-lg fa-trash"></i></a>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-5">
+            <div class="dataTables_info">Página <b>{{ReservaListarCtrl.currentPage}}</b> de <b>{{numPages}}</b> de um total de <b>{{ReservaListarCtrl.totalItems}}</b> registros</div>
+         </div>
+         <div class="col-sm-7">
+            <div class="dataTables_paginate paging_simple_numbers">
+            <ul uib-pagination 
+              total-items="ReservaListarCtrl.totalItems" 
+              ng-model="ReservaListarCtrl.currentPage"
+              items-per-page="ReservaListarCtrl.registrosPorPagina" 
+              max-size="ReservaListarCtrl.maxSize" 
+              class="dataTables_paginate paging_simple_numbers" 
+              boundary-links="true"
+              ng-change="ReservaListarCtrl.pageChanged()"
+              rotate="true"
+              force-ellipses="true" 
+              num-pages="numPages"
+              previous-text="Próximo" next-text="Anterior" first-text="Primeira" last-text="Útima"
+              >
+            </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>                
+</div>
+
+<!--script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script-->

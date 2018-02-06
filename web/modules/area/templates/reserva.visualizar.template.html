@@ -1,0 +1,66 @@
+
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-dashboard"></i> {{ReservaVisualizarCtrl.titulo}}</h1>
+      <p>A free and modular admin template</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li><a href="#">{{ReservaVisualizarCtrl.titulo}} {{ReservaVisualizarCtrl.alertMessage}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-title">
+          <button class="btn btn-primary icon-btn" type="button" ui-sref='reserva-manter'><i class="fa fa-fw fa-lg fa-check-circle"></i>Cadastrar
+          </button>          
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+               <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                  <div class="row">
+                    <!--div class="col-sm-2">
+                      <div>
+                         <ul class="unstyled">
+                            <li ng-repeat="e in ReservaVisualizarCtrl.events" class="ng-scope">
+                                <div class="alert alert-info ng-binding" ng-click="ReservaVisualizarCtrl.remove($index)">
+                                    <a class="close"><i class="icon-remove"></i></a>
+                                    <b>{{e.title}}</b>                                     
+                                </div>
+                            </li>  
+                        </ul>
+                      </div>
+                    </div-->                    
+                    <div class="col-sm-12">
+                      <div ui-calendar ng-model="ReservaVisualizarCtrl.eventSources"></div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>                
+</div>
+<style type="text/css">
+ .canceled-event{
+    border:#FF4040;
+    background-color:#FF4040; 
+ }
+ .pendente-event{
+    border:#7D9EC0;
+    background-color:#7D9EC0; 
+ }
+ .old-event{
+    border:#CDCDC1;
+    background-color:#CDCDC1; 
+ }
+
+</style>

@@ -1,0 +1,110 @@
+
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-dashboard"></i> {{ReservaManterCtrl.titulo}}</h1>
+      <p>Cadastre os dados do proprietário</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li><a href="#">{{ReservaManterCtrl.titulo}}</a></li>
+      </ul>
+    </div>
+  </div>  
+  <div ng-repeat="alert in ReservaManterCtrl.alerts" class="row">
+    <div class="col-md-12">      
+      <div class="bs-component">
+        <div class="alert alert-dismissible" ng-class="alert.type">
+          <button class="close" type="button" ng-click="ReservaManterCtrl.closeAlert($index)"
+          >X</button>
+          <strong>{{alert.msg}}</strong>          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <!--h3 class="card-title">Texto</h3-->
+        <div class="card-body">
+          <form name="reservaForm">
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <label class="control-label">Apartamento * </label>
+                  <select required ng-model="ReservaManterCtrl.reserva.apartamento" ng-if="ReservaManterCtrl.reserva.isView !== true" 
+                  class="form-control" ng-disabled="ReservaManterCtrl.reserva.isView"
+                  ng-change="ReservaManterCtrl.carregarMoradores()"
+                  ng-options="option as option.descricao for option in ReservaManterCtrl.apartamentos track by option.id">
+                  </select>
+                  <input class="form-control" ng-if="ReservaManterCtrl.reserva.isView === true" ng-model="ReservaManterCtrl.reserva.apartamento.descricao" disabled="true" />
+                </div>                 
+              </div>
+              <div class="row">
+                  <div class="form-group col-md-12">
+                    <label class="control-label">Moradores * </label>
+                    <select required ng-model="ReservaManterCtrl.reserva.morador" ng-if="ReservaManterCtrl.reserva.isView !== true" 
+                    class="form-control" ng-disabled="ReservaManterCtrl.reserva.isView || ReservaManterCtrl.modadorDisabled"
+                    ng-options="option as option.nome for option in ReservaManterCtrl.moradores track by option.id">                  
+                    </select>
+                    <input class="form-control" ng-if="ReservaManterCtrl.reserva.isView === true" ng-model="ReservaManterCtrl.reserva.morador.nome" disabled="true" />
+                  </div>                               
+              </div>  
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="control-label">Area *</label>
+                  <select required ng-model="ReservaManterCtrl.reserva.area" 
+                  class="form-control" ng-disabled="ReservaManterCtrl.reserva.isView"
+                  ng-options="option as option.titulo for option in ReservaManterCtrl.areas track by option.id">
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Status *</label>
+                  <select class="form-control" id="bosque" ng-disabled="ReservaManterCtrl.reserva.isView" ng-model="ReservaManterCtrl.reserva.status" required>
+                    <option value='R' selected>Reservado</option>
+                    <option value='C'>Cancelado</option>
+                    <option value='P'>Pendente</option>                    
+                  </select>
+                </div>                
+              </div>          
+              <div class="row">    
+                <div class="form-group col-md-6">
+                  <label class="control-label">Data da Reserva *</label>
+                  <input required class="form-control" id="reserva" type="text" placeholder="Select Date"                  
+                  ng-disabled="ReservaManterCtrl.reserva.isView"
+                  maxlength="11" ui-mask="99/99/9999" ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-model="ReservaManterCtrl.reserva.data">                   
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Debito</label>
+                  <input class="form-control" type="text" placeholder=""
+                  maxlength="8" 
+                  ui-money-mask ng-disabled="ReservaManterCtrl.reserva.isView"
+                  ng-model="ReservaManterCtrl.reserva.saldo">
+                </div>                 
+              </div>  
+              <div class="row">
+                <div class=" col-md-12">
+                  <button class="btn btn-primary icon-btn" type="button" ng-click="ReservaManterCtrl.cadastrar(reservaForm)" ng-disabled="ReservaManterCtrl.reserva.isView"><i class="fa fa-fw fa-lg fa-check-circle"></i>Salvar</button>&nbsp;&nbsp;&nbsp;
+                  <a class="btn btn-default icon-btn" ui-sref='reserva-listar'><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar</a>
+                </div>
+              </div>            
+            </form>
+          </div>
+        </div>
+        <div class="card-footer">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+    <div class="clearix"></div>
+  </div>
+</div>
+<script type="text/javascript">    
+  $('#reserva').datepicker({
+    format: "dd/mm/yyyy",
+    autoclose: true,
+    todayHighlight: true
+  });
+</script>

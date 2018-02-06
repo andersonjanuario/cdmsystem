@@ -9,15 +9,36 @@
 
 
     function ProprietarioManterController($scope, ProprietarioFactory, ProprietarioService, $state) {
+        //Atributos
         var vm = this;
         vm.titulo = undefined;
         vm.proprietario = undefined;
+        vm.alerts = [];
+
+        //Instancia Metodos
         vm.cadastrar = cadastrar;
         vm.removerFoto = removerFoto;
         vm.findById = findById;
+        vm.addAlert = addAlert;
+        vm.closeAlert = closeAlert;
 
+
+        //Metodos
         function removerFoto(){
             vm.proprietario.foto = 'images/user.png';
+        }
+
+
+        function addAlert(type, message) {
+        //    $log.info('addAlert type: ' + type + '; message: ' + message + '.');
+            vm.alerts.push({
+                "type": type,
+                "msg": message
+            });
+        }
+
+        function closeAlert(index) {
+            vm.alerts.splice(index, 1);
         }
 
         function activate() {
@@ -31,14 +52,14 @@
                 };
             } else {
                 vm.proprietario = objeto;
-                vm.findById(vm.proprietario.id);
-                ProprietarioFactory.limparProprietario();
+                vm.findById(vm.proprietario.id);                
             }
+            ProprietarioFactory.limparProprietario();
         }
 
         function verificarTitulo(objeto){
             if (angular.isUndefined(objeto)) {
-            vm.titulo = "Cadastro do Proprietário";
+                vm.titulo = "Cadastro do Proprietário";
             }else if(objeto.isView){
                 vm.titulo = "Visualização do Proprietário";
             }else{
@@ -50,20 +71,22 @@
             if (form.$valid) {
                 var proprietarioConverted = ProprietarioFactory.convertBack(vm.proprietario);
                 if (angular.isUndefined(proprietarioConverted.id)) {
-                    ProprietarioService.create(proprietarioConverted).then(function onSuccess(response) {
-                        console.log(response.data);
+                    ProprietarioService.create(proprietarioConverted).then(function onSuccess(response) {                        
                         activate();
                     }).catch(function onError(response) {
-                        console.log(response);
+                        vm.addAlert('alert-danger', 'Erro!');
                     });
+                    vm.addAlert('alert-success', 'Sucesso!');
                 } else {                    
                     ProprietarioService.update(proprietarioConverted).then(function onSuccess(response) {
-                        console.log(response.data);
+                        vm.addAlert('alert-danger', 'Erro!');
                         $state.go('proprietario-listar');
                     }).catch(function onError(response) {
-                        console.log(response);
+                        vm.addAlert('alert-danger', 'Erro!');
                     });                    
                 }
+            }else{
+                vm.addAlert('alert-danger', 'Preencha os campos obrigatórios!');
             }
 
         }
@@ -73,18 +96,9 @@
                 var objeto = ProprietarioFactory.convert(response.data);                
                 vm.proprietario.foto = objeto.foto; 
             }).catch(function onError(response) {
-                console.log(response);
+                vm.addAlert('alert-danger', 'Erro!');
             });
         };
-
-        function remover(codigo) {
-            ProprietarioService.remove(codigo).then(function onSuccess(response) {
-                console.log(response.data);
-                activate();
-            }).catch(function onError(response) {
-                console.log(response);
-            });
-        }
 
         $scope.uploadFile = function (element) {
             var file = element.files;

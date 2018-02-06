@@ -1,0 +1,196 @@
+
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-dashboard"></i> {{MoradorManterCtrl.titulo}}</h1>
+      <p>Cadastre os dados do proprietário</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li><a href="#">{{MoradorManterCtrl.titulo}}</a></li>
+      </ul>
+    </div>
+  </div>  
+  <div ng-repeat="alert in MoradorManterCtrl.alerts" class="row">
+    <div class="col-md-12">      
+      <div class="bs-component">
+        <div class="alert alert-dismissible" ng-class="alert.type">
+          <button class="close" type="button" ng-click="MoradorManterCtrl.closeAlert($index)"
+          >X</button>
+          <strong>{{alert.msg}}</strong>          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <!--h3 class="card-title">Texto</h3-->
+        <div class="card-body">
+          <form name="moradorForm">
+            <div class="row">
+              <div class="form-group col-md-2">
+                <div class="image"><img class="img-circle" src="{{MoradorManterCtrl.morador.foto}}" alt="" style="width:120px; height:120px;"></div>
+              </div>           
+            </div>
+            <div class="row">              
+              <div class="form-group col-md-12">
+                <label class="control-label">Foto</label>                  
+                <div class="input-group">
+                  <input class="form-control"  
+                  name="image" 
+                  accept="image/*" 
+                  required="false" 
+                  id="fileinput" 
+                  type="file"
+                  onchange="angular.element(this).scope().uploadFile(this)"
+                  ng-disabled="MoradorManterCtrl.morador.isView"
+                  />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="MoradorManterCtrl.removerFoto(moradorForm)" ng-disabled="MoradorManterCtrl.morador.isView" type="button">Remover Foto</button></span>                  
+                  </div>
+                </div>
+              </div>            
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="control-label">Nome *</label>
+                  <input class="form-control" type="text" placeholder="" ng-model="MoradorManterCtrl.morador.nome" ng-disabled="MoradorManterCtrl.morador.isView" maxlength="250" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Email</label>
+                  <input class="form-control" type="email" placeholder="" maxlength="50" ng-model="MoradorManterCtrl.morador.email" ng-disabled="MoradorManterCtrl.morador.isView">
+                </div>
+              </div>
+              <div class="row">    
+                <div class="form-group col-md-6">
+                  <label class="control-label">CPF</label>
+                  <input class="form-control" type="text" placeholder="" maxlength="15" 
+                  ui-mask="999.999.999-99"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-model="MoradorManterCtrl.morador.cpf" ng-disabled="MoradorManterCtrl.morador.isView">
+                </div>
+               <div class="form-group col-md-6">
+                  <label class="control-label">RG</label>
+                  <input class="form-control" type="text" maxlength="15" 
+                  ng-disabled="MoradorManterCtrl.morador.isView"
+                  ui-mask="?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9" ui-mask-placeholder ui-mask-placeholder-char=" "
+                  ng-model="MoradorManterCtrl.morador.rg">
+                </div>  
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="control-label">Telefone (Não precisa colocar digito 9 no para celulares)</label>
+                  <input class="form-control" type="text" placeholder="" 
+                  ui-mask="(99) 9999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-disabled="MoradorManterCtrl.morador.isView"
+                  maxlength="15" ng-model="MoradorManterCtrl.morador.fone_principal">
+                </div>  
+                <div class="form-group col-md-6">
+                  <label class="control-label">Telefone Contato (Não precisa colocar digito 9 no para celulares)</label>
+                  <input class="form-control" type="text" placeholder="" 
+                  ui-mask="(99) 9999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-disabled="MoradorManterCtrl.morador.isView"
+                  maxlength="15" ng-model="MoradorManterCtrl.morador.fone_secundario">
+                </div> 
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="control-label">Idade</label>
+                  <input class="form-control" type="text" placeholder="" 
+                  ui-mask="?9?9"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-disabled="MoradorManterCtrl.morador.isView"
+                  maxlength="2" ng-model="MoradorManterCtrl.morador.idade">
+                </div>  
+                <div class="form-group col-md-6">
+                  <label class="control-label">Apartamento</label>
+                  <select required ng-model="MoradorManterCtrl.morador.apartamento" 
+                  class="form-control" ng-disabled="MoradorManterCtrl.morador.isView"
+                  ng-options="option as option.descricao for option in MoradorManterCtrl.apartamentos track by option.id">
+                  </select>
+                </div> 
+              </div>     
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="control-label">Entrada</label>
+                  <input class="form-control" id="dataEntrada" type="text" placeholder="Select Date"                  
+                  ng-disabled="MoradorManterCtrl.morador.isView"
+                  maxlength="11" ui-mask="99/99/9999" ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-model="MoradorManterCtrl.morador.entrada">
+                </div>  
+                <div class="form-group col-md-6">
+                  <label class="control-label">Saída</label>
+                  <input class="form-control" id="dataSaida" type="text" placeholder="Select Date"                  
+                  ng-disabled="MoradorManterCtrl.morador.isView"
+                  maxlength="11" ui-mask="99/99/9999" ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-model="MoradorManterCtrl.morador.saida">
+                </div> 
+              </div>
+              <div class="row">                              
+                <div class="form-group col-md-6">
+                  <label class="control-label">Parentesco</label>
+                  <select required ng-model="MoradorManterCtrl.morador.parentesco" 
+                  class="form-control" ng-disabled="MoradorManterCtrl.morador.isView"
+                  ng-options="option as option.descricao for option in MoradorManterCtrl.parentescos track by option.id">
+                  </select>
+                </div>                
+                <div class="form-group col-md-6">
+                  <label class="control-label col-md-8">O morador é um <b>inquilino</b>?</label>
+                  <div class="col-md-4">
+                    <div class="radio-inline">
+                      <label>
+                        <input required type="radio" value="S" name="inquilino" ng-model="MoradorManterCtrl.morador.inquilino" ng-disabled="MoradorManterCtrl.morador.isView">Sim
+                      </label>
+                    </div>
+                    <div class="radio-inline">
+                      <label>
+                        <input required type="radio" value="N" name="inquilino" ng-model="MoradorManterCtrl.morador.inquilino" ng-disabled="MoradorManterCtrl.morador.isView">Não
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label col-md-8">Ainda é <b>MORADOR</b>?</label>
+                  <div class="col-md-4">
+                    <div class="radio-inline">
+                      <label>
+                        <input required type="radio" value="1" name="status" ng-model="MoradorManterCtrl.morador.status" ng-disabled="MoradorManterCtrl.morador.isView">Sim
+                      </label>
+                    </div>
+                    <div class="radio-inline">
+                      <label>
+                        <input required type="radio" value="0" name="status" ng-model="MoradorManterCtrl.morador.status" ng-disabled="MoradorManterCtrl.morador.isView">Não
+                      </label>
+                    </div>
+                  </div>
+                </div>                                       
+              </div>
+              <div class="row ">
+                <div class=" col-md-12">
+                  <button class="btn btn-primary icon-btn" type="button" ng-click="MoradorManterCtrl.cadastrar(moradorForm)" ng-disabled="MoradorManterCtrl.morador.isView"><i class="fa fa-fw fa-lg fa-check-circle"></i>Salvar</button>&nbsp;&nbsp;&nbsp;
+                  <a class="btn btn-default icon-btn" ui-sref='morador-listar'><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar</a>
+                </div>
+              </div>            
+            </form>
+          </div>
+        </div>
+        <div class="card-footer">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+    <div class="clearix"></div>
+  </div>
+</div>    
+<script type="text/javascript">    
+  $('#dataEntrada').datepicker({
+    format: "dd/mm/yyyy",
+    autoclose: true,
+    todayHighlight: true
+  });
+  $('#dataSaida').datepicker({
+    format: "dd/mm/yyyy",
+    autoclose: true,
+    todayHighlight: true
+  });  
+</script>

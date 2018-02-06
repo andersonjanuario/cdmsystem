@@ -25,7 +25,7 @@
             var _params = {
                 'timestamp':timestamp
             };
-            return $http.get(_baseUrl,{params:_params});
+            return $http.get(_baseUrl + '/all' ,{params:_params});
         };
 
         function findById(codigo) {
@@ -38,15 +38,12 @@
 
 
         function findByFilter(skipIn, takeIn, pesquisa, order, sort) {
-            var skip = undefined;
-            var take = undefined;
-            if(angular.isUndefined(skipIn) && angular.isUndefined(takeIn)){
-                skip = 0;                
-                take = 5;
-            } else {
+            var skip = 0;
+            var take = 5;
+            if(!angular.isUndefined(skipIn) && !angular.isUndefined(takeIn)){
                 skip = (skipIn - 1)*takeIn;
                 take = takeIn;
-            }
+            } 
 
             var timestap = new Date().getTime();
             var _params = {

@@ -12,6 +12,20 @@
       </ul>
     </div>
   </div>
+  <!--alerta alerts="ProprietarioManterCtrl.alerts">
+  </alerta-->
+  <div ng-repeat="alert in ProprietarioManterCtrl.alerts" class="row">
+    <div class="col-md-12">      
+      <div class="bs-component">
+        <div class="alert alert-dismissible" ng-class="alert.type">
+          <button class="close" type="button" ng-click="ProprietarioManterCtrl.closeAlert($index)"
+          >X</button>
+          <strong>{{alert.msg}}</strong>
+          <!--a class="alert-link" href="#">Change a few things up</a> and try submitting again.-->
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-12">
@@ -25,118 +39,118 @@
               </div>           
             </div>
             <div class="row">              
-                <div class="form-group col-md-12">
-                  <label class="control-label">Foto</label>                  
-<div class="input-group">
+              <div class="form-group col-md-12">
+                <label class="control-label">Foto</label>                  
+                <div class="input-group">
 
-                    <input class="form-control"  
-                    name="image" 
-                    accept="image/*" 
-                    required="" 
-                    id="fileinput" 
-                    type="file"
-                    onchange="angular.element(this).scope().uploadFile(this)"
-                    ng-disabled="ProprietarioManterCtrl.proprietario.isView"
-                    />
-                    <span class="input-group-btn">
-                          <button class="btn btn-default" ng-click="ProprietarioManterCtrl.removerFoto(proprietarioForm)" ng-disabled="ProprietarioManterCtrl.proprietario.isView" type="button">Remover Foto</button></span>                  
-              </div>
+                  <input class="form-control"  
+                  name="image" 
+                  accept="image/*" 
+                  required="" 
+                  id="fileinput" 
+                  type="file"
+                  onchange="angular.element(this).scope().uploadFile(this)"
+                  ng-disabled="ProprietarioManterCtrl.proprietario.isView"
+                  />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="ProprietarioManterCtrl.removerFoto(proprietarioForm)" ng-disabled="ProprietarioManterCtrl.proprietario.isView" type="button">Remover Foto</button></span>                  
+                  </div>
                 </div>
-            </div>            
-            <div class="row">
-              <div class="form-group col-md-6">
-                <label class="control-label">Nome *</label>
-                <input class="form-control" type="text" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.nome" ng-disabled="ProprietarioManterCtrl.proprietario.isView" maxlength="250">
+              </div>            
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="control-label">Nome *</label>
+                  <input class="form-control" type="text" placeholder="" ng-model="ProprietarioManterCtrl.proprietario.nome" ng-disabled="ProprietarioManterCtrl.proprietario.isView" maxlength="250" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Email</label>
+                  <input class="form-control" type="email" placeholder="" maxlength="50" ng-model="ProprietarioManterCtrl.proprietario.email" ng-disabled="ProprietarioManterCtrl.proprietario.isView">
+                </div>
               </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Email</label>
-                <input class="form-control" type="email" placeholder="" maxlength="50" ng-model="ProprietarioManterCtrl.proprietario.email" ng-disabled="ProprietarioManterCtrl.proprietario.isView">
-              </div>
-            </div>
-            <div class="row">    
-              <div class="form-group col-md-6">
-                <label class="control-label">CPF</label>
-                <input class="form-control" type="text" placeholder="" maxlength="15" 
-                ui-mask="999.999.999-99"  ui-mask-placeholder ui-mask-placeholder-char="_"
-                ng-model="ProprietarioManterCtrl.proprietario.cpf" ng-disabled="ProprietarioManterCtrl.proprietario.isView">
-              </div>
+              <div class="row">    
+                <div class="form-group col-md-6">
+                  <label class="control-label">CPF</label>
+                  <input class="form-control" type="text" placeholder="" maxlength="15" 
+                  ui-mask="999.999.999-99"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-model="ProprietarioManterCtrl.proprietario.cpf" ng-disabled="ProprietarioManterCtrl.proprietario.isView">
+                </div>
 
-              <div class="form-group col-md-6">
-                <label class="control-label">Debito</label>
-                <input class="form-control" type="text" placeholder="" 
-                ui-money-mask ng-disabled="ProprietarioManterCtrl.proprietario.isView"
-                ng-model="ProprietarioManterCtrl.proprietario.debito">
-              </div> 
-            </div>
-            <div class="row">
-              <div class="form-group col-md-6">
-                <label class="control-label">Telefone (Não precisa colocar digito 9 no para celulares)</label>
-                <input class="form-control" type="text" placeholder="" 
-                ui-mask="(99) 9999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_"
-                ng-disabled="ProprietarioManterCtrl.proprietario.isView"
-                maxlength="15" ng-model="ProprietarioManterCtrl.proprietario.fonePrincipal">
-              </div>  
-              <div class="form-group col-md-6">
-                <label class="control-label">Telefone Contato (Não precisa colocar digito 9 no para celulares)</label>
-                <input class="form-control" type="text" placeholder="" 
-                ui-mask="(99) 9999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_"
-                ng-disabled="ProprietarioManterCtrl.proprietario.isView"
-                maxlength="15" ng-model="ProprietarioManterCtrl.proprietario.foneSecundario">
-              </div> 
-            </div>
-            <div class="row">                              
-              <div class="form-group col-md-6">
-                <label class="control-label">RG</label>
-                <input class="form-control" type="text" maxlength="15" 
-                ng-disabled="ProprietarioManterCtrl.proprietario.isView"
-                ui-mask="?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9" ui-mask-placeholder ui-mask-placeholder-char=" "
-                ng-model="ProprietarioManterCtrl.proprietario.rg">
-              </div>   
-              <div class="form-group col-md-6">
-                <label class="control-label col-md-8">O proprietário encontra-se <b>ADIMPLENTE</b></label>
-                <div class="col-md-4">
-                  <div class="radio-inline">
-                    <label>
-                      <input type="radio" value="S" name="adimplente" ng-model="ProprietarioManterCtrl.proprietario.adimplente" ng-disabled="ProprietarioManterCtrl.proprietario.isView">Sim
-                    </label>
-                  </div>
-                  <div class="radio-inline">
-                    <label>
-                      <input type="radio" value="N" name="adimplente" ng-model="ProprietarioManterCtrl.proprietario.adimplente" ng-disabled="ProprietarioManterCtrl.proprietario.isView">Não
-                    </label>
-                  </div>
-                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Debito</label>
+                  <input class="form-control" type="text" placeholder="" 
+                  ui-money-mask ng-disabled="ProprietarioManterCtrl.proprietario.isView"
+                  ng-model="ProprietarioManterCtrl.proprietario.debito">
+                </div> 
               </div>
-              <div class="form-group col-md-6">
-                <label class="control-label col-md-8">O proprietário é <b>MORADOR</b> do apartamento</label>
-                <div class="col-md-4">
-                  <div class="radio-inline">
-                    <label>
-                      <input type="radio" value="S" name="morador" ng-model="ProprietarioManterCtrl.proprietario.morador" ng-disabled="ProprietarioManterCtrl.proprietario.isView">Sim
-                    </label>
-                  </div>
-                  <div class="radio-inline">
-                    <label>
-                      <input type="radio" value="N" name="morador" ng-model="ProprietarioManterCtrl.proprietario.morador" ng-disabled="ProprietarioManterCtrl.proprietario.isView">Não
-                    </label>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="control-label">Telefone (Não precisa colocar digito 9 no para celulares)</label>
+                  <input class="form-control" type="text" placeholder="" 
+                  ui-mask="(99) 9999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-disabled="ProprietarioManterCtrl.proprietario.isView"
+                  maxlength="15" ng-model="ProprietarioManterCtrl.proprietario.fonePrincipal">
+                </div>  
+                <div class="form-group col-md-6">
+                  <label class="control-label">Telefone Contato (Não precisa colocar digito 9 no para celulares)</label>
+                  <input class="form-control" type="text" placeholder="" 
+                  ui-mask="(99) 9999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_"
+                  ng-disabled="ProprietarioManterCtrl.proprietario.isView"
+                  maxlength="15" ng-model="ProprietarioManterCtrl.proprietario.foneSecundario">
+                </div> 
+              </div>
+              <div class="row">                              
+                <div class="form-group col-md-6">
+                  <label class="control-label">RG</label>
+                  <input class="form-control" type="text" maxlength="15" 
+                  ng-disabled="ProprietarioManterCtrl.proprietario.isView"
+                  ui-mask="?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9" ui-mask-placeholder ui-mask-placeholder-char=" "
+                  ng-model="ProprietarioManterCtrl.proprietario.rg">
+                </div>   
+                <div class="form-group col-md-6">
+                  <label class="control-label col-md-8">O proprietário encontra-se <b>ADIMPLENTE</b></label>
+                  <div class="col-md-4">
+                    <div class="radio-inline">
+                      <label>
+                        <input type="radio" value="S" name="adimplente" ng-model="ProprietarioManterCtrl.proprietario.adimplente" ng-disabled="ProprietarioManterCtrl.proprietario.isView">Sim
+                      </label>
+                    </div>
+                    <div class="radio-inline">
+                      <label>
+                        <input type="radio" value="N" name="adimplente" ng-model="ProprietarioManterCtrl.proprietario.adimplente" ng-disabled="ProprietarioManterCtrl.proprietario.isView">Não
+                      </label>
+                    </div>
                   </div>
                 </div>
-              </div>                                       
-            </div>
-            <div class="row ">
-              <div class=" col-md-12">
-<button class="btn btn-primary icon-btn" type="button" ng-click="ProprietarioManterCtrl.cadastrar(proprietarioForm)" ng-disabled="ProprietarioManterCtrl.proprietario.isView"><i class="fa fa-fw fa-lg fa-check-circle"></i>Cadastrar</button>&nbsp;&nbsp;&nbsp;
-        <a class="btn btn-default icon-btn" ui-sref='proprietario-listar'><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar</a>
-            </div>
-            </div>            
-          </form>
+                <div class="form-group col-md-6">
+                  <label class="control-label col-md-8">O proprietário é <b>MORADOR</b> do apartamento</label>
+                  <div class="col-md-4">
+                    <div class="radio-inline">
+                      <label>
+                        <input type="radio" value="S" name="morador" ng-model="ProprietarioManterCtrl.proprietario.morador" ng-disabled="ProprietarioManterCtrl.proprietario.isView">Sim
+                      </label>
+                    </div>
+                    <div class="radio-inline">
+                      <label>
+                        <input type="radio" value="N" name="morador" ng-model="ProprietarioManterCtrl.proprietario.morador" ng-disabled="ProprietarioManterCtrl.proprietario.isView">Não
+                      </label>
+                    </div>
+                  </div>
+                </div>                                       
+              </div>
+              <div class="row ">
+                <div class=" col-md-12">
+                  <button class="btn btn-primary icon-btn" type="button" ng-click="ProprietarioManterCtrl.cadastrar(proprietarioForm)" ng-disabled="ProprietarioManterCtrl.proprietario.isView"><i class="fa fa-fw fa-lg fa-check-circle"></i>Salvar</button>&nbsp;&nbsp;&nbsp;
+                  <a class="btn btn-default icon-btn" ui-sref='proprietario-listar'><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar</a>
+                </div>
+              </div>            
+            </form>
+          </div>
+        </div>
+        <div class="card-footer">
+          &nbsp;
         </div>
       </div>
-      <div class="card-footer">
-        &nbsp;
-      </div>
     </div>
+    <div class="clearix"></div>
   </div>
-  <div class="clearix"></div>
-</div>
 </div>
